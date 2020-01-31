@@ -21,8 +21,15 @@ public class WayResolverTest {
 
     @Test
     public void shouldGenerateStraightWay() throws IOException {
-        MapData mapData = TestUtil.createMapData(new Position(34, 15), new Position(34, 77));
-        Way way = diagonalResolver.findWay(mapData);
+        MapData mapData = TestUtil.createMapData(new Position(34, 25), new Position(34, 77));
+        Way way = wayResolver.findWay(mapData);
+        TestUtil.createResult(mapData, way);
+    }
+
+    @Test
+    public void shouldChooseLowCostWay() throws IOException {
+        MapData mapData = TestUtil.createMapData(new Position(34, 19), new Position(34, 25));
+        Way way = wayResolver.findWay(mapData);
         TestUtil.createResult(mapData, way);
     }
 

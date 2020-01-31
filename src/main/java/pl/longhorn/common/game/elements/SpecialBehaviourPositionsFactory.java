@@ -5,21 +5,19 @@ import pl.longhorn.common.game.elements.map.SpecialMapBehaviour;
 import pl.longhorn.common.game.elements.position.Position;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 public class SpecialBehaviourPositionsFactory {
 
-    public static SpecialBehaviourPositions create(String collisions) {
+    public static SpecialBehaviourPositions create(String collisions, Map<Position, SpecialMapBehaviour> specialMapBehaviours) {
         SpecialMapBehaviour collision = SpecialMapBehaviour.collision();
-        Map<Position, SpecialMapBehaviour> specialMapBehaviourByPosition = new HashMap<>();
         Arrays.stream(collisions.split(";"))
                 .filter(Objects::nonNull)
                 .filter(string -> !string.isBlank())
                 .map(SpecialBehaviourPositionsFactory::toPosition)
-                .forEach(position -> specialMapBehaviourByPosition.put(position, collision));
-        return new SpecialBehaviourPositions(specialMapBehaviourByPosition);
+                .forEach(position -> specialMapBehaviours.put(position, collision));
+        return new SpecialBehaviourPositions(specialMapBehaviours);
     }
 
     private static Position toPosition(String txt) {
