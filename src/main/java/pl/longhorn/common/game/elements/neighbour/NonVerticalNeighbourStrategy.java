@@ -5,7 +5,7 @@ import pl.longhorn.common.game.elements.position.Position;
 import java.util.LinkedList;
 import java.util.List;
 
-public class NonVerticalNeighbourStrategy implements NeighbourStategy {
+public class NonVerticalNeighbourStrategy implements NeighbourStrategy {
 
     @Override
     public List<Position> getNeighbour(Position position) {

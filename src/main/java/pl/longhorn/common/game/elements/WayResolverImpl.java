@@ -8,14 +8,14 @@ import pl.longhorn.common.game.elements.map.Way;
 import pl.longhorn.common.game.elements.map.WeightNode;
 import pl.longhorn.common.game.elements.position.Position;
 import pl.longhorn.common.game.elements.estimation.EstimationStrategy;
-import pl.longhorn.common.game.elements.neighbour.NeighbourStategy;
+import pl.longhorn.common.game.elements.neighbour.NeighbourStrategy;
 
 import java.util.*;
 
 @RequiredArgsConstructor
 public class WayResolverImpl implements WayResolver {
 
-    private final NeighbourStategy neighbourStategy;
+    private final NeighbourStrategy neighbourStrategy;
     private final EstimationStrategy estimationStrategy;
 
     @Override
@@ -28,7 +28,7 @@ public class WayResolverImpl implements WayResolver {
             if (examinedIsTarget(parent, mapData)) {
                 return createWay(parent);
             }
-            List<Position> neighbours = neighbourStategy.getNeighbour(parent.getNode().getPosition());
+            List<Position> neighbours = neighbourStrategy.getNeighbour(parent.getNode().getPosition());
             List<WeightNode> neighboursByPrice = sortByPrice(neighbours, closed, parent, mapData);
             addToOpen(open, neighboursByPrice);
             closed.add(parent.getNode().getPosition());
