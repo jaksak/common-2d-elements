@@ -1,11 +1,12 @@
 package pl.longhorn.common.game.elements;
 
-import pl.longhorn.common.game.elements.map.MapData;
-import pl.longhorn.common.game.elements.map.Way;
 import org.junit.Test;
 import pl.longhorn.common.game.elements.estimation.DiagonalEstimationStrategy;
 import pl.longhorn.common.game.elements.estimation.EuclidEstimationStrategy;
 import pl.longhorn.common.game.elements.estimation.ManhattanEstimationStrategy;
+import pl.longhorn.common.game.elements.map.MapData;
+import pl.longhorn.common.game.elements.map.Way;
+import pl.longhorn.common.game.elements.neighbour.NonVerticalNeighbourStrategy;
 import pl.longhorn.common.game.elements.neighbour.VerticalNeighbourStrategy;
 
 import java.io.IOException;
@@ -17,8 +18,8 @@ import java.util.function.Supplier;
 
 public class RandomWayResolverTest {
 
-    WayResolver wayResolver = new WayResolverImpl(new VerticalNeighbourStrategy(), new ManhattanEstimationStrategy(10));
-    WayResolver diagonalResolver = new WayResolverImpl(new VerticalNeighbourStrategy(), new DiagonalEstimationStrategy(7));
+    WayResolver wayResolver = new WayResolverImpl(new NonVerticalNeighbourStrategy(), new ManhattanEstimationStrategy(10));
+    WayResolver diagonalResolver = new WayResolverImpl(new NonVerticalNeighbourStrategy(), new DiagonalEstimationStrategy(7));
     WayResolver euclidResolver = new WayResolverImpl(new VerticalNeighbourStrategy(), new EuclidEstimationStrategy(7));
 
     @Test
@@ -56,7 +57,7 @@ public class RandomWayResolverTest {
 
     private List<Way> findWaysToRandomTarget() {
         List<Way> ways = new LinkedList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 2; i++) {
             tryUntilNull(() -> wayResolver.findWay(TestUtil.createRandomMapData()), ways);
             tryUntilNull(() -> diagonalResolver.findWay(TestUtil.createRandomMapData()), ways);
             tryUntilNull(() -> euclidResolver.findWay(TestUtil.createRandomMapData()), ways);

@@ -11,5 +11,6 @@
         <module name="common-2d-elements.main" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="11" />
   </component>
 </project>
