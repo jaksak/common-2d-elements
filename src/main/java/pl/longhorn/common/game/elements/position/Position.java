@@ -6,6 +6,6 @@ import lombok.Value;
 @Value
 @EqualsAndHashCode
 public class Position {
-    private final int x;
-    private final int y;
+    int x;
+    int y;
 }

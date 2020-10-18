@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import pl.longhorn.common.game.elements.position.Position;
+import pl.longhorn.common.game.elements.target.PreciseReachedTargetStrategy;
+import pl.longhorn.common.game.elements.target.ReachedTargetStrategy;
 
 import java.util.Optional;
 
@@ -20,6 +22,8 @@ public class MapData {
 
     private int defaultPrice;
 
+    private ReachedTargetStrategy reachedTargetStrategy;
+
     private SpecialBehaviourPositions specialBehaviourPositions;
 
     public Optional<Integer> findPrice(Position position) {
@@ -35,7 +39,21 @@ public class MapData {
         }
     }
 
+    public boolean reachEnoughTarget(Position currentPosition){
+        return reachedTargetStrategy.isEnoughTarget(currentPosition, target);
+    }
+
     private boolean positionIsInMap(Position position) {
         return position.getX() < width && position.getY() < height;
+    }
+
+    public MapData(Position start, Position target, int width, int height, int defaultPrice, SpecialBehaviourPositions specialBehaviourPositions) {
+        this.start = start;
+        this.target = target;
+        this.width = width;
+        this.height = height;
+        this.defaultPrice = defaultPrice;
+        this.specialBehaviourPositions = specialBehaviourPositions;
+        this.reachedTargetStrategy = new PreciseReachedTargetStrategy();
     }
 }

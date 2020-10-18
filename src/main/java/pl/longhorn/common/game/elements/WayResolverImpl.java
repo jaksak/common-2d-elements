@@ -25,7 +25,7 @@ public class WayResolverImpl implements WayResolver {
 
         while (!open.isEmpty()) {
             WeightNode parent = open.remove();
-            if (examinedIsTarget(parent, mapData)) {
+            if (examinedNodeReachTarget(parent, mapData)) {
                 return createWay(parent);
             }
             List<Position> neighbours = neighbourStrategy.getNeighbour(parent.getNode().getPosition());
@@ -86,8 +86,8 @@ public class WayResolverImpl implements WayResolver {
         return new Way(steps);
     }
 
-    private boolean examinedIsTarget(WeightNode node, MapData mapData) {
-        return mapData.getTarget().equals(node.getNode().getPosition());
+    private boolean examinedNodeReachTarget(WeightNode weightNode, MapData mapData) {
+        return mapData.reachEnoughTarget(weightNode.getNode().getPosition());
     }
 
     private Queue<WeightNode> prepareToExamine(MapData mapData) {
