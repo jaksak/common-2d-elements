@@ -9,8 +9,8 @@ import pl.longhorn.common.game.elements.position.Position;
 @EqualsAndHashCode
 @AllArgsConstructor
 public class Node {
-    private Position position;
-    private Node parent;
+    private final Position position;
+    private final Node parent;
 
     public static Node start(Position position) {
         return new Node(position, null);

@@ -49,15 +49,15 @@ public class WayResolverImpl implements WayResolver {
     }
 
     private List<WeightNode> sortByPrice(List<Position> neighbours, Set<Position> closed, WeightNode parent, MapData mapData) {
-        List<WeightNode> toReturn = new LinkedList<>();
+        List<WeightNode> nodeSortedByPrice = new LinkedList<>();
         for(Position position : neighbours){
             if (notContainsPosition(position, closed)) {
                 val price = getPrice(position, parent, mapData);
-                price.ifPresent(integer -> toReturn.add(new WeightNode(parent.getNode().goTo(position), integer)));
+                price.ifPresent(priceValue -> nodeSortedByPrice.add(new WeightNode(parent.getNode().goTo(position), priceValue)));
             }
         }
-        toReturn.sort(Comparator.comparingInt(WeightNode::getPrice));
-        return toReturn;
+        nodeSortedByPrice.sort(Comparator.comparingInt(WeightNode::getPrice));
+        return nodeSortedByPrice;
     }
 
     private Optional<WeightNode> getNodeByPosition(Position position, Queue<WeightNode> open) {

@@ -1,14 +1,14 @@
 package pl.longhorn.common.game.elements;
 
-import pl.longhorn.common.game.elements.map.MapData;
-import pl.longhorn.common.game.elements.map.Way;
 import org.junit.Test;
-import pl.longhorn.common.game.elements.neighbour.NonVerticalNeighbourStrategy;
-import pl.longhorn.common.game.elements.position.Position;
 import pl.longhorn.common.game.elements.estimation.DiagonalEstimationStrategy;
 import pl.longhorn.common.game.elements.estimation.EuclidEstimationStrategy;
 import pl.longhorn.common.game.elements.estimation.ManhattanEstimationStrategy;
+import pl.longhorn.common.game.elements.map.MapData;
+import pl.longhorn.common.game.elements.map.Way;
+import pl.longhorn.common.game.elements.neighbour.NonVerticalNeighbourStrategy;
 import pl.longhorn.common.game.elements.neighbour.VerticalNeighbourStrategy;
+import pl.longhorn.common.game.elements.position.Position;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,14 +21,15 @@ public class WayResolverTest {
 
     @Test
     public void shouldGenerateStraightWay() throws IOException {
-        MapData mapData = TestUtil.createMapData(new Position(34, 25), new Position(34, 77));
+        MapData mapData = TestUtil.createMapData(new Position(34, 25),
+                new Position(34, 77));
         Way way = wayResolver.findWay(mapData);
         TestUtil.createResult(mapData, way);
     }
 
     @Test
     public void shouldChooseLowCostWay() throws IOException {
-        MapData mapData = TestUtil.createMapData(new Position(34, 19), new Position(34, 25));
+        MapData mapData = TestUtil.createMapData(new Position(34, 19), new Position(10, 18));
         Way way = wayResolver.findWay(mapData);
         TestUtil.createResult(mapData, way);
     }

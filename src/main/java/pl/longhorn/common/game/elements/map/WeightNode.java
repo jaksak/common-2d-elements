@@ -8,8 +8,8 @@ import pl.longhorn.common.game.elements.position.Position;
 @AllArgsConstructor
 public class WeightNode {
 
-    private Node node;
-    private int price;
+    private final Node node;
+    private final int price;
 
     public static WeightNode start(Position position) {
         return new WeightNode(Node.start(position), 0);
