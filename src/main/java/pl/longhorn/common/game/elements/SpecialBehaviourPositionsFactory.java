@@ -21,11 +21,13 @@ public class SpecialBehaviourPositionsFactory {
     }
 
     private static SpecialBehaviourPositions create(String collisions, Map<Position, SpecialMapBehaviour> specialMapBehaviours, SpecialMapBehaviour collisionBehaviour) {
-        Arrays.stream(collisions.split(";"))
-                .filter(Objects::nonNull)
-                .filter(string -> !string.isBlank())
-                .map(SpecialBehaviourPositionsFactory::toPosition)
-                .forEach(position -> specialMapBehaviours.put(position, collisionBehaviour));
+        if (collisions != null && !collisions.isBlank()){
+            Arrays.stream(collisions.split(";"))
+                    .filter(Objects::nonNull)
+                    .filter(string -> !string.isBlank())
+                    .map(SpecialBehaviourPositionsFactory::toPosition)
+                    .forEach(position -> specialMapBehaviours.put(position, collisionBehaviour));
+        }
         return new SpecialBehaviourPositions(specialMapBehaviours);
     }
 
